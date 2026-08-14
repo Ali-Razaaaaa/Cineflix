@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054255816055",
+    "project_id": "cineflix-e5f10",
+    "storage_bucket": "cineflix-e5f10.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054255816055:android:943eefd4a975e5becc1572",
+        "android_client_info": {
+          "package_name": "com.cineflix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaJn_Bv4_dF7krJ20E-jyUOUsmKHARp1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
