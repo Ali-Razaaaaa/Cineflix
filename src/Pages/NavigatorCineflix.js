@@ -5,6 +5,7 @@ import CineflixHome from '../screens/Home';
 import CineflixSearch from '../screens/Search';
 import FavoritesScreen from '../screens/Favorites';
 import Popular from '../screens/Popular';
+import Profile from '../screens/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,18 +15,19 @@ export default function NavigatorCineflix() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#E50914',
-        tabBarInactiveTintColor: '#666',
+        tabBarInactiveTintColor: '#555',
         tabBarStyle: {
           backgroundColor: '#0d0d0d',
           borderTopColor: '#1a1a1a',
           borderTopWidth: 1,
-          paddingBottom: 5,
+          paddingBottom: 6,
           paddingTop: 5,
-          height: 62,
+          height: 64,
         },
         tabBarLabelStyle: {
-          fontSize: 11,
+          fontSize: 10,
           fontWeight: '600',
+          marginTop: 1,
         },
       }}
     >
@@ -66,6 +68,16 @@ export default function NavigatorCineflix() {
           tabBarLabel: 'Popular',
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'trending-up' : 'trending-up-outline'} size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'person' : 'person-outline'} size={size} color={color} />
           ),
         }}
       />

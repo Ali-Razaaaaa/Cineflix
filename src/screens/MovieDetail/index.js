@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '../../redux/favoritesSlice';
+import { addToHistory } from '../../redux/historySlice';
 import { TMDB_API_KEY, TMDB_IMAGE_BASE_URL, TMDB_BASE_URL } from '../../constants';
 import { styles } from './styles';
 
@@ -34,6 +35,12 @@ export default function MovieDetail({ navigation, route }) {
       if (!res.ok) throw new Error('Failed to fetch movie details');
       const data = await res.json();
       setMovie(data);
+      // Track in history
+      dispatch(addToHistory({
+        id: data.id,
+        title: data.title,
+        poster_path: data.poster_path,
+      }));
     } catch (err) {
       setError('Could not load movie details. Please try again.');
     } finally {
