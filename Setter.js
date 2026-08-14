@@ -15,7 +15,7 @@ export default function Setter() {
   const [isSplashVisible, setIsSplashVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsSplashVisible(false), 3000);
+    const timer = setTimeout(() => setIsSplashVisible(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 

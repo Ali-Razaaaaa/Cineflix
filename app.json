@@ -1,4 +1,5 @@
 {
   "name": "Project",
-  "displayName": "Project"
+  "displayName": "Project",
+  "userInterfaceStyle": "dark"
 }

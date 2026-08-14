@@ -1,28 +1,34 @@
-import { styles } from './styles';
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, FlatList, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
-
-const { width } = Dimensions.get('window');
+import { TMDB_IMAGE_BASE_URL } from '../../constants';
+import { styles } from './styles';
 
 export default function FavoritesScreen() {
-  const favorites = useSelector(state => state.favorites);
+  const favorites = useSelector(state => state.favorites || []);
 
-  const renderItem = ({ item }) => (
-    <View style={styles.movieCard}>
-      <Image
-        source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
-        style={styles.poster}
-        resizeMode="cover"
-      />
-      <Text style={styles.movieTitle} numberOfLines={1}>
-        {item.title}
-      </Text>
-    </View>
-  );
+  const renderItem = ({ item }) => {
+    const imageUri = item.poster_path 
+      ? `${TMDB_IMAGE_BASE_URL}${item.poster_path}`
+      : 'https://via.placeholder.com/500x750/333333/FFFFFF?text=No+Poster';
+
+    return (
+      <View style={styles.movieCard}>
+        <Image
+          source={{ uri: imageUri }}
+          style={styles.poster}
+          resizeMode="cover"
+        />
+        <Text style={styles.movieTitle} numberOfLines={1}>
+          {item.title}
+        </Text>
+      </View>
+    );
+  };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Your Favorite Movies</Text>
       {favorites.length === 0 ? (
         <Text style={styles.emptyText}>No favorites added yet.</Text>
@@ -35,8 +41,6 @@ export default function FavoritesScreen() {
           contentContainerStyle={styles.listContainer}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 }
-
-

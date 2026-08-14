@@ -50,7 +50,7 @@ export default function NavigatorCineflix() {
         component={Popular}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? 'flame' : 'flame-outline'} size={size} color={color} />
+            <Ionicons name={focused ? 'trending-up' : 'trending-up-outline'} size={size} color={color} />
           ),
         }}
       />
