@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import CineflixHome from './CineflixHome';
-import CineflixSearch from './CineflixSearch';
-import FavoritesScreen from './CineflixFavorites';
-import Popular from './Popular';
+import CineflixHome from '../screens/Home';
+import CineflixSearch from '../screens/Search';
+import FavoritesScreen from '../screens/Favorites';
+import Popular from '../screens/Popular';
 
 const Tab = createBottomTabNavigator();
 

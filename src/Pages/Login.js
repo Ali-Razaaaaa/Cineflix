@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -20,7 +20,8 @@ const Login = ({ navigation }) => {
     }
 
     try {
-      await auth().signInWithEmailAndPassword(email.trim(), password);
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email.trim(), password);
 
       Alert.alert('Success', 'Login successful');
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SplashScreen from './src/Pages/SplashScreen';
-import HomeScreen from './src/Pages/HomeScreen';
+import SplashScreen from './src/screens/Splash';
+import HomeScreen from './src/screens/HomeScreen';
 import Signup from './src/Pages/Signup';
 import Login from './src/Pages/Login';
 import NavigatorCineflix from './src/Pages/NavigatorCineflix';
