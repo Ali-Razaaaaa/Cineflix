@@ -13,33 +13,47 @@ export default function NavigatorCineflix() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'red',
-        tabBarInactiveTintColor: 'gray',
-        tabBarStyle: { backgroundColor: 'black' },
+        tabBarActiveTintColor: '#E50914',
+        tabBarInactiveTintColor: '#666',
+        tabBarStyle: {
+          backgroundColor: '#0d0d0d',
+          borderTopColor: '#1a1a1a',
+          borderTopWidth: 1,
+          paddingBottom: 5,
+          paddingTop: 5,
+          height: 62,
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: '600',
+        },
       }}
     >
       <Tab.Screen
-        name="CineflixHome"
+        name="Home"
         component={CineflixHome}
         options={{
+          tabBarLabel: 'Home',
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="CineflixSearch"
+        name="Search"
         component={CineflixSearch}
         options={{
+          tabBarLabel: 'Search',
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'search' : 'search-outline'} size={size} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="Favorites"
+        name="My List"
         component={FavoritesScreen}
         options={{
+          tabBarLabel: 'My List',
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'heart' : 'heart-outline'} size={size} color={color} />
           ),
@@ -49,6 +63,7 @@ export default function NavigatorCineflix() {
         name="Popular"
         component={Popular}
         options={{
+          tabBarLabel: 'Popular',
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'trending-up' : 'trending-up-outline'} size={size} color={color} />
           ),
