@@ -4,18 +4,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { combineReducers } from 'redux';
 import favoritesReducer from './favoritesSlice';
 import historyReducer from './historySlice';
-import authReducer from './authSlice';
 
 const rootReducer = combineReducers({
   favorites: favoritesReducer,
   history: historyReducer,
-  auth: authReducer, // NOT persisted — Firebase manages its own session
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['favorites', 'history'], // auth is intentionally excluded
+  whitelist: ['favorites', 'history'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -48,6 +48,7 @@ export const styles = StyleSheet.create({
     right: 0,
     padding: 16,
     backgroundColor: 'rgba(0,0,0,0.55)',
+    zIndex: 20,
   },
   seekBarContainer: {
     marginBottom: 10,

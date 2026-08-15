@@ -1,16 +1,17 @@
 import React, { useRef, useState, useCallback } from 'react';
 import {
-  View, Text, TouchableOpacity, ActivityIndicator,
-  StatusBar, Dimensions,
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  StatusBar,
+  Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Video from 'react-native-video';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { DEMO_VIDEO_URL, VIDEO_REQUEST_HEADERS } from '../../constants';
 import { styles } from './styles';
-
-// Big Buck Bunny — Creative Commons licensed demo clip
-const DEMO_URL = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-
 const { width } = Dimensions.get('window');
 
 function formatTime(seconds) {
@@ -67,7 +68,7 @@ export default function VideoPlayer({ navigation }) {
     resetControlTimeout();
   };
 
-  const handleSeekBarPress = (e) => {
+  const handleSeekBarPress = e => {
     const { locationX } = e.nativeEvent;
     const percent = locationX / width;
     if (videoRef.current) {
@@ -80,8 +81,13 @@ export default function VideoPlayer({ navigation }) {
     return (
       <SafeAreaView style={styles.errorContainer}>
         <Ionicons name="alert-circle-outline" size={52} color="#555" />
-        <Text style={styles.errorText}>Could not load the video. Please try again.</Text>
-        <TouchableOpacity style={styles.retryButton} onPress={() => setError(false)}>
+        <Text style={styles.errorText}>
+          Could not load the video. Please try again.
+        </Text>
+        <TouchableOpacity
+          style={styles.retryButton}
+          onPress={() => setError(false)}
+        >
           <Text style={styles.retryButtonText}>Retry</Text>
         </TouchableOpacity>
       </SafeAreaView>
@@ -94,7 +100,7 @@ export default function VideoPlayer({ navigation }) {
 
       <Video
         ref={videoRef}
-        source={{ uri: DEMO_URL }}
+        source={{ uri: DEMO_VIDEO_URL, headers: VIDEO_REQUEST_HEADERS }}
         style={styles.video}
         resizeMode="contain"
         paused={paused}
@@ -129,7 +135,10 @@ export default function VideoPlayer({ navigation }) {
         <>
           {/* Header */}
           <SafeAreaView style={styles.headerBar} edges={['top']}>
-            <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => navigation.goBack()}
+            >
               <Ionicons name="close" size={26} color="white" />
             </TouchableOpacity>
             <Text style={styles.demoLabel}>Demo playback — sample content</Text>
@@ -145,7 +154,9 @@ export default function VideoPlayer({ navigation }) {
                 style={styles.seekBarTrack}
                 onPress={handleSeekBarPress}
               >
-                <View style={[styles.seekBarFill, { width: `${progress * 100}%` }]} />
+                <View
+                  style={[styles.seekBarFill, { width: `${progress * 100}%` }]}
+                />
               </TouchableOpacity>
               <View style={styles.timeRow}>
                 <Text style={styles.timeText}>{formatTime(currentTime)}</Text>
@@ -155,12 +166,22 @@ export default function VideoPlayer({ navigation }) {
 
             {/* Buttons Row */}
             <View style={styles.buttonsRow}>
-              <TouchableOpacity style={styles.seekButton} onPress={seekBackward}>
+              <TouchableOpacity
+                style={styles.seekButton}
+                onPress={seekBackward}
+              >
                 <Ionicons name="play-back" size={24} color="white" />
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.playPauseButton} onPress={togglePlayPause}>
-                <Ionicons name={paused ? 'play' : 'pause'} size={30} color="white" />
+              <TouchableOpacity
+                style={styles.playPauseButton}
+                onPress={togglePlayPause}
+              >
+                <Ionicons
+                  name={paused ? 'play' : 'pause'}
+                  size={30}
+                  color="white"
+                />
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.seekButton} onPress={seekForward}>

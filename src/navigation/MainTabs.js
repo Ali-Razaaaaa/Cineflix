@@ -10,7 +10,7 @@ import Profile from '../screens/Profile';
 
 const Tab = createBottomTabNavigator();
 
-export default function NavigatorCineflix() {
+export default function MainTabs() {
   const insets = useSafeAreaInsets();
 
   return (

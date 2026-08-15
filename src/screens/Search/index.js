@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity, FlatList,
-  Image, ActivityIndicator, Alert,
+  Image, ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TMDB_API_KEY, TMDB_IMAGE_BASE_URL, TMDB_BASE_URL } from '../../constants';
+import { TMDB_ACCESS_TOKEN, TMDB_IMAGE_BASE_URL, TMDB_BASE_URL } from '../../constants';
 import { styles } from './styles';
 
 const PLACEHOLDER = 'https://via.placeholder.com/500x750/1a1a1a/FFFFFF?text=No+Poster';
@@ -23,8 +23,13 @@ export default function CineflixSearch({ navigation }) {
     setError(null);
     setHasSearched(true);
     try {
-      const url = `${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`;
-      const response = await fetch(url);
+      const url = `${TMDB_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`;
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
+          accept: 'application/json',
+        },
+      });
       if (!response.ok) throw new Error('Search failed');
       const json = await response.json();
       setResults(json.results || []);

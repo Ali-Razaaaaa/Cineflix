@@ -1,6 +1,6 @@
 import { styles } from './styles';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default function SplashScreen() {
@@ -13,5 +13,4 @@ export default function SplashScreen() {
     </LinearGradient>
   );
 }
-
 
