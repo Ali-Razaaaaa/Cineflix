@@ -1,97 +1,79 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<h1 align="center">🎬 Cineflix</h1>
+<h3 align="center">A full-stack React Native movie app — browse, search, save, and watch, built end-to-end with real authentication and a production-style architecture.</h3>
 
-# Getting Started
+<p align="center">
+  <img src="https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native">
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase">
+  <img src="https://img.shields.io/badge/Redux%20Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white" alt="Redux Toolkit">
+  <img src="https://img.shields.io/badge/TMDB%20API-01D277?style=for-the-badge&logo=themoviedatabase&logoColor=white" alt="TMDB API">
+</p>
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+<h3 align="center">📱 What it does</h3>
+<ul>
+<li><p>🔐 <strong>Real authentication</strong> — Firebase email/password sign-up, login, and password reset, with persisted sessions</p></li>
+<li><p>🎞️ <strong>Movie browsing</strong> — Popular, Upcoming, and Top Rated lists pulled live from the TMDB API</p></li>
+<li><p>🔍 <strong>Search</strong> — real-time movie search with empty and error states handled properly</p></li>
+<li><p>📄 <strong>Movie details</strong> — full detail screen with cast, overview, genres, and similar titles</p></li>
+<li><p>⭐ <strong>My List</strong> — favourites and viewing history, persisted on-device with Redux Persist</p></li>
+<li><p>▶️ <strong>Demo video player</strong> — custom playback controls (seek, play/pause, auto-hiding UI) built with react-native-video</p></li>
+<li><p>👤 <strong>Profile</strong> — account info, favourites, and recently viewed, in one place</p></li>
+</ul>
 
-## Step 1: Start Metro
+<h3 align="center">🛠️ Tech Stack</h3>
+<p align="center">
+  <img src="https://img.shields.io/badge/React%20Native%200.86-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
+  <img src="https://img.shields.io/badge/React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
+  <img src="https://img.shields.io/badge/React%20Navigation-6B52AE?style=for-the-badge&logo=react-router&logoColor=white">
+  <img src="https://img.shields.io/badge/Redux%20Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+  <img src="https://img.shields.io/badge/Firebase%20Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black">
+  <img src="https://img.shields.io/badge/TMDB%20REST%20API-01D277?style=for-the-badge&logo=themoviedatabase&logoColor=white">
+</p>
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+<h3 align="center">📂 Project Structure</h3>
 
-To start the Metro dev server, run the following command from the root of your React Native project:
-
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+```
+src/
+  components/     Reusable password field, modals
+  constants/      API keys, theme, video config — centralized, not hardcoded
+  navigation/     Root stack + bottom tab navigators
+  redux/          Store, favourites slice, history slice
+  screens/
+    Auth/         Login, Signup, shared auth styles
+    Home/         Movie browsing (Popular, Upcoming, Top Rated)
+    Search/       Live search
+    MovieDetail/  Full movie detail + cast + similar titles
+    Favorites/    Saved movies
+    Popular/      Dedicated popular movies screen
+    Profile/      Account, favourites, history
+    VideoPlayer/  Custom video player with controls
+    Splash/       App launch screen
 ```
 
-## Step 2: Build and run your app
+<h3 align="center">⚠️ Known Limitations</h3>
+<ul>
+<li><p>Video playback uses a shared demo clip rather than real per-movie streams — intentional, since streaming actual movie content raises licensing/copyright issues for a portfolio project</p></li>
+<li><p>Favourites and history are stored locally on-device, not synced to the cloud</p></li>
+<li><p>The TMDB API token is centralized in <code>constants/api.js</code> for this demo; a production version would proxy TMDB calls through a backend instead of shipping the token in the client</p></li>
+</ul>
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+<h3 align="center">🚀 Getting Started</h3>
 
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+git clone https://github.com/Ali-Razaaaaa/Cineflix.git
+cd Cineflix
+npm install
+npx react-native run-android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+<h3 align="center">📬 Contact</h3>
+<div align="center">
+  <a href="https://www.linkedin.com/in/ali-raza-42965a237/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+  <a href="mailto:razabugtiali@gmail.com" target="_blank">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
+  </a>
+  <a href="https://alirazaaaportfolio.netlify.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio">
+  </a>
+</div>
