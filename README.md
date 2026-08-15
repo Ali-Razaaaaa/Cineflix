@@ -56,16 +56,7 @@ src/
 <li><p>The TMDB API token is centralized in <code>constants/api.js</code> for this demo; a production version would proxy TMDB calls through a backend instead of shipping the token in the client</p></li>
 </ul>
 
-<h3 align="center">🚀 Getting Started</h3>
-
-```bash
-git clone https://github.com/Ali-Razaaaaa/Cineflix.git
-cd Cineflix
-npm install
-npx react-native run-android
-```
-
-<h3 align="center">📬 Contact</h3>
+<h3 align="center">Contact</h3>
 <div align="center">
   <a href="https://www.linkedin.com/in/ali-raza-42965a237/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
