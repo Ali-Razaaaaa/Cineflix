@@ -18,7 +18,13 @@
 <li><p>▶️ <strong>Demo video player</strong> — custom playback controls (seek, play/pause, auto-hiding UI) built with react-native-video</p></li>
 <li><p>👤 <strong>Profile</strong> — account info, favourites, and recently viewed, in one place</p></li>
 </ul>
-
+<h3 align="center">📲 Try it</h3>
+<p align="center">
+  <a href="YOUR_DRIVE_LINK_HERE" target="_blank">
+    <img src="https://img.shields.io/badge/Download%20APK-4CAF50?style=for-the-badge&logo=android&logoColor=white" alt="Download APK">
+  </a>
+</p>
+<p align="center"><i>Debug build — enable "install from unknown sources" on Android to install.</i></p>
 <h3 align="center">🛠️ Tech Stack</h3>
 <p align="center">
   <img src="https://img.shields.io/badge/React%20Native%200.86-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
