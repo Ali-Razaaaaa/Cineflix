@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, Text, Image, TouchableOpacity, FlatList,
-  Linking, ActivityIndicator,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite } from '../../redux/favoritesSlice';
-import { TMDB_API_KEY, TMDB_IMAGE_BASE_URL, TMDB_BASE_URL } from '../../constants';
+import {
+  TMDB_ACCESS_TOKEN,
+  TMDB_IMAGE_BASE_URL,
+  TMDB_BASE_URL,
+} from '../../constants';
 import { styles } from './styles';
 
-const PLACEHOLDER = 'https://via.placeholder.com/500x750/1a1a1a/FFFFFF?text=No+Poster';
+const PLACEHOLDER =
+  'https://via.placeholder.com/500x750/1a1a1a/FFFFFF?text=No+Poster';
 
 export default function CineflixHome({ navigation }) {
   const [popular, setPopular] = useState([]);
@@ -21,20 +30,40 @@ export default function CineflixHome({ navigation }) {
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites || []);
+  const favorites = useSelector(state => state.favorites || []);
 
   const fetchAllData = async () => {
     setLoading(true);
     setError(null);
     try {
       const [popRes, upRes, topRes] = await Promise.all([
-        fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`),
-        fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1`),
-        fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${TMDB_API_KEY}&language=en-US&page=1`),
+        fetch(`${TMDB_BASE_URL}/movie/popular?language=en-US&page=1`, {
+          headers: {
+            Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
+            accept: 'application/json',
+          },
+        }),
+
+        fetch(`${TMDB_BASE_URL}/movie/upcoming?language=en-US&page=1`, {
+          headers: {
+            Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
+            accept: 'application/json',
+          },
+        }),
+
+        fetch(`${TMDB_BASE_URL}/movie/top_rated?language=en-US&page=1`, {
+          headers: {
+            Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
+            accept: 'application/json',
+          },
+        }),
       ]);
-      if (!popRes.ok || !upRes.ok || !topRes.ok) throw new Error('Fetch failed');
+      if (!popRes.ok || !upRes.ok || !topRes.ok)
+        throw new Error('Fetch failed');
       const [popData, upData, topData] = await Promise.all([
-        popRes.json(), upRes.json(), topRes.json(),
+        popRes.json(),
+        upRes.json(),
+        topRes.json(),
       ]);
       setPopular(popData.results || []);
       setUpcoming(upData.results || []);
@@ -46,11 +75,13 @@ export default function CineflixHome({ navigation }) {
     }
   };
 
-  useEffect(() => { fetchAllData(); }, []);
+  useEffect(() => {
+    fetchAllData();
+  }, []);
 
-  const isFavorite = (movieId) => favorites.some(m => m.id === movieId);
+  const isFavorite = movieId => favorites.some(m => m.id === movieId);
 
-  const handleToggleFavorite = (movie) => {
+  const handleToggleFavorite = movie => {
     if (isFavorite(movie.id)) {
       dispatch(removeFavorite(movie.id));
     } else {
@@ -62,9 +93,12 @@ export default function CineflixHome({ navigation }) {
 
   const handleHeroPlay = () => navigation.navigate('VideoPlayer');
   const handleHeroInfo = () => {
-    if (mainMovie) navigation.navigate('MovieDetail', { movieId: mainMovie.id });
+    if (mainMovie)
+      navigation.navigate('MovieDetail', { movieId: mainMovie.id });
   };
-  const handleHeroMyList = () => { if (mainMovie) handleToggleFavorite(mainMovie); };
+  const handleHeroMyList = () => {
+    if (mainMovie) handleToggleFavorite(mainMovie);
+  };
 
   const renderMovieRow = (title, data) => (
     <View style={{ marginBottom: 24 }}>
@@ -72,18 +106,22 @@ export default function CineflixHome({ navigation }) {
       <FlatList
         data={data}
         horizontal
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => {
           const imageUri = item.poster_path
             ? `${TMDB_IMAGE_BASE_URL}${item.poster_path}`
             : PLACEHOLDER;
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate('MovieDetail', { movieId: item.id })}
+              onPress={() =>
+                navigation.navigate('MovieDetail', { movieId: item.id })
+              }
               style={{ marginRight: 10 }}
             >
               <Image source={{ uri: imageUri }} style={styles.posterImage} />
-              <Text style={styles.movieTitle} numberOfLines={1}>{item.title}</Text>
+              <Text style={styles.movieTitle} numberOfLines={1}>
+                {item.title}
+              </Text>
               <TouchableOpacity
                 onPress={() => handleToggleFavorite(item)}
                 style={{ position: 'absolute', top: 5, right: 5 }}
@@ -110,7 +148,12 @@ export default function CineflixHome({ navigation }) {
 
   if (loading) {
     return (
-      <SafeAreaView style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          { justifyContent: 'center', alignItems: 'center' },
+        ]}
+      >
         <ActivityIndicator size="large" color="#E50914" />
         <Text style={{ color: '#aaa', marginTop: 12 }}>Loading movies…</Text>
       </SafeAreaView>
@@ -119,10 +162,27 @@ export default function CineflixHome({ navigation }) {
 
   if (error) {
     return (
-      <SafeAreaView style={[styles.container, { justifyContent: 'center', alignItems: 'center', padding: 30 }]}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          { justifyContent: 'center', alignItems: 'center', padding: 30 },
+        ]}
+      >
         <Ionicons name="alert-circle-outline" size={48} color="#555" />
-        <Text style={{ color: 'white', marginVertical: 16, textAlign: 'center', lineHeight: 22 }}>{error}</Text>
-        <TouchableOpacity style={{ backgroundColor: '#E50914', padding: 12, borderRadius: 6 }} onPress={fetchAllData}>
+        <Text
+          style={{
+            color: 'white',
+            marginVertical: 16,
+            textAlign: 'center',
+            lineHeight: 22,
+          }}
+        >
+          {error}
+        </Text>
+        <TouchableOpacity
+          style={{ backgroundColor: '#E50914', padding: 12, borderRadius: 6 }}
+          onPress={fetchAllData}
+        >
           <Text style={{ color: 'white', fontWeight: '700' }}>Retry</Text>
         </TouchableOpacity>
       </SafeAreaView>
@@ -136,17 +196,31 @@ export default function CineflixHome({ navigation }) {
   const ListHeader = () => (
     <>
       <Text style={styles.logo}>CINEFLIX</Text>
-
-      {/* Hero Backdrop */}
-      <View style={{ width: '100%', height: 380, marginBottom: 10 }}>
-        <Image source={{ uri: backdropUri }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+      <View
+        style={{
+          width: '80%',
+          height: 300,
+          marginVertical: 10,
+          alignSelf: 'center',
+        }}
+      >
+        <Image
+          source={{ uri: backdropUri }}
+          style={styles.homeScreenImageStyle}
+        />
         <LinearGradient
           colors={['transparent', 'rgba(0,0,0,0.85)', '#0a0a0a']}
-          style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 200 }}
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 150,
+          }}
         />
       </View>
 
-      <Text style={styles.description}>{mainMovie?.title || 'Featured Movie'}</Text>
+      <Text style={styles.description}>{mainMovie?.title}</Text>
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleHeroMyList}>
@@ -158,7 +232,10 @@ export default function CineflixHome({ navigation }) {
           <Text style={styles.buttonText}>My List</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, styles.playButton]} onPress={handleHeroPlay}>
+        <TouchableOpacity
+          style={[styles.button, styles.playButton]}
+          onPress={handleHeroPlay}
+        >
           <Ionicons name="play" size={22} color="black" />
           <Text style={[styles.buttonText, { color: 'black' }]}>Play</Text>
         </TouchableOpacity>

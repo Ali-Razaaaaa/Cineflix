@@ -1,11 +1,11 @@
 import { styles } from './styles';
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Pressable } from 'react-native';
+import { View, Text, ImageBackground, Pressable } from 'react-native';
 
 export default function HomeScreen({ navigation }) {
   return (
     <ImageBackground
-      source={require('../../assets/image.jpg')}
+      source={require('../../../assets/image.jpg')}
       style={styles.background}
       resizeMode="cover"
     >
@@ -26,12 +26,13 @@ export default function HomeScreen({ navigation }) {
 
         <Text style={styles.subtitle}>Already Have An Account?</Text>
 
-        <Pressable style={styles.button} onPress={() => navigation.navigate('Login')}>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate('Login')}
+        >
           <Text style={styles.buttonText}>Get Started</Text>
         </Pressable>
       </View>
     </ImageBackground>
   );
 }
-
-

@@ -71,4 +71,8 @@ export const styles = StyleSheet.create({
     marginTop: 5,
     lineHeight: 15,
   },
+  homeScreenImageStyle: {
+    width: '100%',
+    height: '100%',
+  },
 });
