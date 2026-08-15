@@ -2,11 +2,27 @@
 <h3 align="center">A full-stack React Native movie app — browse, search, save, and watch, built end-to-end with real authentication and a production-style architecture.</h3>
 
 <p align="center">
+  <a href="https://drive.google.com/file/d/1ZMvys4Qya_Ej8ehpjnfIbrmqZI11nsRW/view?usp=sharing" target="_blank">
+    <img src="https://img.shields.io/badge/📲%20Download%20APK-4CAF50?style=for-the-badge&logo=android&logoColor=white" alt="Download APK">
+  </a>
+</p>
+<p align="center"><i>Debug build — enable "install from unknown sources" on Android to install.</i></p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native">
   <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase">
   <img src="https://img.shields.io/badge/Redux%20Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white" alt="Redux Toolkit">
   <img src="https://img.shields.io/badge/TMDB%20API-01D277?style=for-the-badge&logo=themoviedatabase&logoColor=white" alt="TMDB API">
 </p>
+
+<h3 align="center">📸 Screenshots</h3>
+<p align="center">
+  <img src="./screenshots/home.png" width="200">
+  <img src="./screenshots/movie-detail.png" width="200">
+  <img src="./screenshots/search.png" width="200">
+  <img src="./screenshots/profile.png" width="200">
+</p>
+<p align="center"><i>Note: rename these to match whatever filenames you actually used when uploading the screenshots.</i></p>
 
 <h3 align="center">📱 What it does</h3>
 <ul>
@@ -18,13 +34,7 @@
 <li><p>▶️ <strong>Demo video player</strong> — custom playback controls (seek, play/pause, auto-hiding UI) built with react-native-video</p></li>
 <li><p>👤 <strong>Profile</strong> — account info, favourites, and recently viewed, in one place</p></li>
 </ul>
-<h3 align="center">📲 Try it</h3>
-<p align="center">
-  <a href="YOUR_DRIVE_LINK_HERE" target="_blank">
-    <img src="https://img.shields.io/badge/Download%20APK-4CAF50?style=for-the-badge&logo=android&logoColor=white" alt="Download APK">
-  </a>
-</p>
-<p align="center"><i>Debug build — enable "install from unknown sources" on Android to install.</i></p>
+
 <h3 align="center">🛠️ Tech Stack</h3>
 <p align="center">
   <img src="https://img.shields.io/badge/React%20Native%200.86-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
@@ -62,7 +72,7 @@ src/
 <li><p>The TMDB API token is centralized in <code>constants/api.js</code> for this demo; a production version would proxy TMDB calls through a backend instead of shipping the token in the client</p></li>
 </ul>
 
-<h3 align="center">Contact</h3>
+<h3 align="center">📬 Contact</h3>
 <div align="center">
   <a href="https://www.linkedin.com/in/ali-raza-42965a237/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
