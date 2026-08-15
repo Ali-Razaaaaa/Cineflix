@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CineflixHome from '../screens/Home';
 import CineflixSearch from '../screens/Search';
 import FavoritesScreen from '../screens/Favorites';
@@ -10,6 +11,8 @@ import Profile from '../screens/Profile';
 const Tab = createBottomTabNavigator();
 
 export default function NavigatorCineflix() {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -20,9 +23,9 @@ export default function NavigatorCineflix() {
           backgroundColor: '#0d0d0d',
           borderTopColor: '#1a1a1a',
           borderTopWidth: 1,
-          paddingBottom: 6,
+          paddingBottom: Math.max(insets.bottom, 6),
           paddingTop: 5,
-          height: 64,
+          height: 58 + Math.max(insets.bottom, 6),
         },
         tabBarLabelStyle: {
           fontSize: 10,
